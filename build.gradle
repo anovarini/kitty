@@ -1,0 +1,88 @@
+/*
+  Copyright 2010-2012 the original copyright holders.
+
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+*/
+
+apply plugin: 'eclipse'			// adds support for eclipse project generation
+apply plugin: 'idea'			// adds support for idea project generation
+apply plugin: 'groovy'			// adds support for groovy
+apply plugin: 'application'		// adds support for building the application
+apply plugin: 'checkstyle'
+apply plugin: 'codenarc'
+
+defaultTasks 'assemble'
+
+// --------------------------------------------------------------------
+// standard config
+
+project.ext.title = 'Apache Kitty (Incubating)'
+project.ext.description = 'Apache Kitty (Incubating) is a JMX-based diagnostics tool'
+project.ext.version = '0.1-SNAPSHOT'
+project.ext.packageName = 'apache-kitty'
+project.ext.applicationName = 'kitty'
+
+compileJava.enabled = false
+compileTestJava.enabled = false
+
+// --------------------------------------------------------------------
+// configuration setup
+
+repositories {
+    mavenCentral()
+}
+
+allprojects {
+	group 'org.apache.kitty'
+	project.ext.releaseBuild = version.endsWith('RELEASE')
+	project.ext.snapshotBuild = version.endsWith('SNAPSHOT')
+}
+
+dependencies {
+    groovy "org.codehaus.groovy:groovy-all:$groovyVersion"
+    groovy "jline:jline:$jlineVersion"
+    groovy "commons-cli:commons-cli:$accliVersion"
+    
+    compile "commons-lang:commons-lang:$aclangVersion"
+    compile "commons-logging:commons-logging:$aclogVersion"
+    
+	testCompile "org.apache.rat:apache-rat-plugin:$aRatVersion"
+	testCompile "junit:junit:$junitVersion"
+}
+
+jar {
+	baseName = "$project.packageName"
+	manifest {
+		attributes (
+			'Main-Class': 'org.apache.kitty.Main',
+			'Implementation-Title': "$project.ext.title",
+			'Implementation-Version': "$project.ext.version"
+		)
+	}
+}
+
+// --------------------------------------------------------------------
+// application plugin config
+
+mainClassName = "org.apache.kitty.Main"
+
+distZip {
+	baseName = "$project.ext.packageName"
+}
+
+task wrapper(type: Wrapper, description: "Kitty Task: Create a Gradle self-download wrapper") {
+	gradleVersion = "$gradleVersion"
+}

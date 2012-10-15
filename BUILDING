@@ -1,0 +1,58 @@
+================================================================================
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+================================================================================
+
+
+** QuickStart **
+
+- If you don't have Gradle, run:
+	'sh gradlew' or 
+	'gradlew.bat'
+
+- To generate the relevant project files run:
+    'gradle eclipse' or 
+    'gradle idea'
+
+- To build the distribution run:
+	'gradle kittyDist'
+
+
+** Gradle **
+
+Apache Kitty uses the Gradle build system.
+
+If you don't have Gradle installed, run the 'gradlew' or 'gradlew.bat' script
+to download and install Gradle on your system.
+
+You can then run 'gradle tasks' to see a list of the tasks in this build.
+The tasks labelled in this format: 'kittyXxxxx' are Apache Kitty specific tasks.
+
+
+
+** Gradle Eclipse Plugin **
+
+Download and install the Gradle Eclipse plugin to get build integration in the 
+Eclipse IDE.  More information, here:
+
+ http://static.springsource.org/sts/docs/2.7.0.M1/reference/html/gradle/index.html
+
+
+
+
+
+
+
+
