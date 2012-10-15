@@ -18,7 +18,7 @@ package com.kitty
 
 class Main {
 
-	static final String KITTY_USAGE = "java -jar apache-kitty.jar <arg>"
+	static final String KITTY_USAGE = "./kitty or kitty.bat <arg>"
 
 	static main(args) {
 

@@ -19,6 +19,7 @@ package com.kitty.command
 import com.kitty.Command
 import com.kitty.client.Client
 import com.kitty.listener.ListDomainListener
+import com.kitty.utils.Constants
 
 final class ListDomains implements Command {
 
@@ -38,7 +39,7 @@ final class ListDomains implements Command {
             }
         }
         else {
-            fireListDomainFailed "Client not connected."
+            fireListDomainFailed Constants.ERROR_NOT_CONNECTED
         }
     }
 }

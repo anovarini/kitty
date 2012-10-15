@@ -34,10 +34,11 @@ final class Ls implements Command {
     @Override
     void execute(Client client, String... args) {
         if (client.connected) {
-            client.ls()
+            def output = client.ls()
+            fireLsDone output
         }
         else {
-            ioDevice.write Constants.ERROR_NOT_CONNECTED
+            fireLsFailed Constants.ERROR_NOT_CONNECTED
         }
     }
 }

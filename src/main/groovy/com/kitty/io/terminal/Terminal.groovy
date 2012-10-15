@@ -25,8 +25,9 @@ import jline.console.ConsoleReader
 import jline.console.history.FileHistory
 import jline.console.completer.Completer
 import jline.console.completer.StringsCompleter
+import com.kitty.listener.LsListener
 
-class Terminal implements IODevice, ChangeDomainListener, ConnectListener, DisconnectListener, ListDomainListener {
+class Terminal implements IODevice, ChangeDomainListener, ConnectListener, DisconnectListener, ListDomainListener, LsListener {
 
     ConsoleReader reader
     String domain
@@ -101,7 +102,7 @@ class Terminal implements IODevice, ChangeDomainListener, ConnectListener, Disco
     }
 
     private void echo(String message) {
-        reader.println "$message"
+        reader.println message
     }
 
     @Override
@@ -118,11 +119,21 @@ class Terminal implements IODevice, ChangeDomainListener, ConnectListener, Disco
 
     @Override
     void domainListed(Object domain) {
-        println "$domain"
+        echo domain
     }
 
     @Override
     void listDomainFailed(Object reason) {
-        println "$reason"
+        echo reason
+    }
+
+    @Override
+    void lsDone(Object output) {
+        echo output
+    }
+
+    @Override
+    void lsFailed(String description) {
+        echo description
     }
 }
