@@ -16,14 +16,15 @@
  */
 package org.apache.kitty.io.terminal
 
-import jline.History
-import jline.SimpleCompletor
-import jline.ConsoleReader
 import org.apache.kitty.IODevice
 import org.apache.kitty.listener.ConnectListener
 import org.apache.kitty.listener.DisconnectListener
 import org.apache.kitty.listener.ChangeDomainListener
 import org.apache.kitty.listener.ListDomainListener
+import jline.console.ConsoleReader
+import jline.console.history.FileHistory
+import jline.console.completer.Completer
+import jline.console.completer.StringsCompleter
 
 class Terminal implements IODevice, ChangeDomainListener, ConnectListener, DisconnectListener, ListDomainListener {
 
@@ -39,14 +40,15 @@ class Terminal implements IODevice, ChangeDomainListener, ConnectListener, Disco
 
     void setup(def commands) {
         reader.setBellEnabled false
-        reader.setUseHistory true
+        reader.setHistoryEnabled true
 
         def historyFile = new File(System.getProperty("user.home"), "kitty.history")
         historyFile.createNewFile()
-        def history = new History(historyFile)
+        def history = new FileHistory(historyFile)
         reader.setHistory history
         def completionValues = commands*.commandName as String[]
-        reader.addCompletor(new SimpleCompletor(completionValues))
+        Completer completer = new StringsCompleter(completionValues)
+        reader.addCompleter(completer)
     }
 
     String read() {
@@ -67,7 +69,7 @@ class Terminal implements IODevice, ChangeDomainListener, ConnectListener, Disco
     }
 
     void close() {
-        reader.flushConsole()
+        reader.flush()
     }
 
     @Override
@@ -99,7 +101,7 @@ class Terminal implements IODevice, ChangeDomainListener, ConnectListener, Disco
     }
 
     private void echo(String message) {
-        reader.printString "$message\n"
+        reader.println "$message"
     }
 
     @Override

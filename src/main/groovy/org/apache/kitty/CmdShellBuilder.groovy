@@ -17,7 +17,6 @@
 package org.apache.kitty
 
 import org.apache.kitty.client.Client
-import jline.ConsoleReader
 import org.apache.kitty.io.terminal.Terminal
 import org.apache.kitty.command.Help
 import org.apache.kitty.command.Connect
@@ -25,9 +24,9 @@ import org.apache.kitty.command.Disconnect
 
 import org.apache.kitty.validation.ConnectValidation
 import org.apache.kitty.command.ListDomains
-import org.apache.kitty.listener.ChangeDomainListener
 import org.apache.kitty.command.ChangeDomain
 import org.apache.kitty.command.Ls
+import jline.console.ConsoleReader
 
 class CmdShellBuilder {
 

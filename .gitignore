@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+
+# Directories #
+.*
+!/.gitignore
+
+build/
+kitty.iml
+kitty.ipr
+kitty.iws
+
