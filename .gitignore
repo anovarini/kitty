@@ -8,8 +8,10 @@
 # Directories #
 .*
 !/.gitignore
-
 build/
+out/
+
+# IDE files #
 kitty.iml
 kitty.ipr
 kitty.iws

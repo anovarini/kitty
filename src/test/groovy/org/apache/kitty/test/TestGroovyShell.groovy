@@ -18,12 +18,8 @@
 
 package org.apache.kitty.test
 
-import org.apache.kitty.command.Help;
+import com.kitty.command.Help;
 
-/**
- * @version $Id: TestGroovyShell.groovy 1299311 2012-03-10 23:56:20Z anovarini $
- *
- */
 class TestGroovyShell {
 	
 	def static final PROMPT = "kitty>"
